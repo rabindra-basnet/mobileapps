@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Style Bazaar - Fashion & Accessories</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="/mobileapps/Image Pasted 2025-11-03 at 12.24.20.png" alt=""
+
+            >
+        </div>
+        <div class="hamburger" onclick="toggleMenu()">☰</div>
+
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="/mobileapps/products/index.html">Products</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <!-- Theme Switcher -->
+        <!-- <div class="theme-switcher">
+            <label for="theme">Choose Theme:</label>
+            <select id="theme" onchange="changeTheme()">
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+            </select>
+        </div> -->
+    </nav>
+
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Spring Collection 2025</h1>
+            <p>Discover the latest trends in fashion with our exclusive new arrivals</p>
+            <a href="/products/index.html" class="cta-button">Shop Now</a>
+        </div>
+    </section>
+
+    <!-- Featured Categories -->
+    <section class="categories">
+        <h2>Shop by Category</h2>
+        <div class="category-grid">
+            <a href="#" class="category-card">
+                <img src="https://images.unsplash.com/photo-1620012253295-c15cc3e65df4?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=400"
+                    alt="Men's Fashion">
+                <h3>Men's Fashion</h3>
+            </a>
+            <a href="#" class="category-card">
+                <img src="https://images.unsplash.com/photo-1581044777550-4cfa60707c03?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=400"
+                    alt="Women's Fashion">
+                <h3>Women's Fashion</h3>
+            </a>
+            <a href="#" class="category-card">
+                <img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=400"
+                    alt="Accessories">
+                <h3>Accessories</h3>
+            </a>
+            <a href="#" class="category-card">
+                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=400"
+                    alt="Footwear">
+                <h3>Footwear</h3>
+            </a>
+        </div>
+    </section>
+
+    <!-- Promotional Banner -->
+    <section class="promo-banner">
+        <div class="promo-content">
+            <h2>Spring Sale!</h2>
+            <p>30% OFF on all summer essentials</p>
+            <a href="#" class="cta-button">View Deals</a>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="featured-products">
+        <h2>Featured Products</h2>
+        <div class="product-slider">
+            <div class="product-item" onmouseover="highlightItem(this)" onmouseout="removeHighlight(this)">
+                <div class="sale-tag">Sale</div>
+                <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=320"
+                    alt="Men's T-Shirt">
+                <h3>Classic Cotton T-Shirt</h3>
+                <p>Comfortable 100% cotton t-shirt in various colors.</p>
+                <div class="price">
+                    <span class="original-price">$24.99</span>
+                    <span class="sale-price">$19.99</span>
+                </div>
+                <a href="#" class="add-to-cart">Add to Cart</a>
+            </div>
+            <div class="product-item" onmouseover="highlightItem(this)" onmouseout="removeHighlight(this)">
+                <img src="https://images.unsplash.com/photo-1475178626620-a4d074967452?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=320"
+                    alt="Women's Jeans">
+                <h3>Slim Fit Jeans</h3>
+                <p>Stylish slim-fit jeans with stretch fabric for comfort.</p>
+                <div class="price">
+                    <span class="current-price">$45.99</span>
+                </div>
+                <a href="#" class="add-to-cart">Add to Cart</a>
+            </div>
+            <div class="product-item" onmouseover="highlightItem(this)" onmouseout="removeHighlight(this)">
+                <div class="sale-tag">Sale</div>
+                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=320"
+                    alt="Sneakers">
+                <h3>Urban Sneakers</h3>
+                <p>Lightweight casual sneakers with memory foam insoles.</p>
+                <div class="price">
+                    <span class="original-price">$69.99</span>
+                    <span class="sale-price">$59.99</span>
+                </div>
+                <a href="#" class="add-to-cart">Add to Cart</a>
+            </div>
+            <div class="product-item" onmouseover="highlightItem(this)" onmouseout="removeHighlight(this)">
+                <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=320"
+                    alt="Backpack">
+                <h3>Adventure Backpack</h3>
+                <p>Durable waterproof backpack with multiple compartments.</p>
+                <div class="price">
+                    <span class="current-price">$34.99</span>
+                </div>
+                <a href="#" class="add-to-cart">Add to Cart</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <h2>What Our Customers Say</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <p>"The quality of clothes is exceptional. Fast shipping and great customer service!"</p>
+                <div class="customer-info">
+                    <span class="customer-name">Sarah J.</span>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <p>"Love my new sneakers! They're comfortable and look exactly like the pictures."</p>
+                <div class="customer-info">
+                    <span class="customer-name">Michael T.</span>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">★★★★☆</div>
+                <p>"Great selection of products and reasonable prices. Would definitely shop here again."</p>
+                <div class="customer-info">
+                    <span class="customer-name">Lisa R.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="newsletter-content">
+            <h2>Stay Updated</h2>
+            <p>Subscribe to our newsletter for exclusive offers and updates</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Your email address" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Snap Quaks</h3>
+                <p>Your one-stop shop for fashion and accessories.</p>
+                <div class="social-icons">
+                    <a href="#" class="social-icon">FB</a>
+                    <a href="#" class="social-icon">IG</a>
+                    <a href="#" class="social-icon">TW</a>
+                    <a href="#" class="social-icon">YT</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="/mobileapps/index.html">Home</a></li>
+                    <li><a href="/mobileapps/products/index.html">Products</a></li>
+                    <li><a href="#">Deals</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Customer Service</h3>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Shipping Policy</a></li>
+                    <li><a href="#">Returns & Exchanges</a></li>
+                    <li><a href="#">Payment Methods</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Kathmandu, Nepal</p>
+                <p>Phone: 980000000</p>
+                <p>Email: info@stylebazaar.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Snap Quaks. All Rights Reserved.</p>
+            <p>Owner: Rabindra Basnet</p>
+        </div>
+    </footer>
+</body>
+
+</html>

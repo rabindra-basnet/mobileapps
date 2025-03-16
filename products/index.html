@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Style Bazaar</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="/mobileapps/script.js"></script>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="/mobileapps/Image Pasted 2025-11-03 at 12.24.20.png" alt="">
+        </div>
+        <div class="hamburger" onclick="toggleMenu()">☰</div>
+        <ul class="nav-links">
+            <li><a href="/mobileapps/index.html">Home</a></li>
+            <li><a href="/mobileapps/products/index.html"  class="active">Products</a></li>
+            <li><a href="#deals">Deals</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Theme Switcher
+    <div class="theme-switcher">
+        <label for="theme">Choose Theme:</label>
+        <select id="theme" onchange="changeTheme()">
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+        </select>
+    </div> -->
+
+    <!-- Products Section -->
+    <section id="products" class="products-container">
+        <h2>Our Products</h2>
+        <div class="product-items">
+            <!-- Featured Products -->
+            <div class="product-item" onmouseover="highlightItem(this)" onmouseout="removeHighlight(this)">
+                <img src="https://img.drz.lazcdn.com/static/np/p/11f0dad8cdc2d75b86adfa85c4569e63.jpg_720x720q80.jpg_.webp" alt="Men's T-Shirt">
+                <h3>Classic Cotton T-Shirt</h3>
+                <p>Comfortable 100% cotton t-shirt in various colors.</p>
+                <span>$19.99</span>
+            </div>
+            <div class="product-item" onmouseover="highlightItem(this)" onmouseout="removeHighlight(this)">
+                <img src="https://m.media-amazon.com/images/I/71swWjLInKL._SY741_.jpg" alt="Women's Jeans">
+                <h3>Slim Fit Jeans</h3>
+                <p>Stylish slim-fit jeans with stretch fabric for comfort.</p>
+                <span>$45.99</span>
+            </div>
+            <div class="product-item" onmouseover="highlightItem(this)" onmouseout="removeHighlight(this)">
+                <img src="https://rukminim2.flixcart.com/image/832/832/xif0q/shoe/4/t/1/10-nm-uc-10-neemans-rock-black-original-imah5hr7kezxhbsn.jpeg?q=70&crop=false" alt="Sneakers">
+                <h3>Urban Sneakers</h3>
+                <p>Lightweight casual sneakers with memory foam insoles.</p>
+                <span>$59.99</span>
+            </div>
+            <div class="product-item" onmouseover="highlightItem(this)" onmouseout="removeHighlight(this)">
+                <img src="https://m.media-amazon.com/images/I/51G-3EXAJ5L._AC_SX466_.jpg" alt="Backpack">
+                <h3>Adventure Backpack</h3>
+                <p>Durable waterproof backpack with multiple compartments.</p>
+                <span>$34.99</span>
+            </div>
+            <div class="product-item" onmouseover="highlightItem(this)" onmouseout="removeHighlight(this)">
+                <img src="https://m.media-amazon.com/images/I/61GfkokcyPL._AC_SY535_.jpg" alt="Watch">
+                <h3>Minimalist Watch</h3>
+                <p>Elegant stainless steel watch with leather strap.</p>
+                <span>$79.49</span>
+            </div>
+
+            <!-- More Products -->
+            <div class="product-item" onmouseover="highlightItem(this)" onmouseout="removeHighlight(this)">
+                <img src="https://m.media-amazon.com/images/I/51mtJDEQjeL._AC_SX679_.jpg" alt="Dress Shirt">
+                <h3>Business Dress Shirt</h3>
+                <p>Wrinkle-resistant formal shirt for professional settings.</p>
+                <span>$38.99</span>
+            </div>
+            <div class="product-item" onmouseover="highlightItem(this)" onmouseout="removeHighlight(this)">
+                <img src="https://static.cimalp.fr/34416-large_default/polarized-sunglasses.jpg" alt="Sunglasses">
+                <h3>Polarized Sunglasses</h3>
+                <p>UV protection sunglasses with durable frame.</p>
+                <span>$24.99</span>
+            </div>
+            <div class="product-item" onmouseover="highlightItem(this)" onmouseout="removeHighlight(this)">
+                <img src="https://m.media-amazon.com/images/I/61a3yv3ljdL._SX679_.jpg" alt="Hoodie">
+                <h3>Fleece Hoodie</h3>
+                <p>Warm cotton-blend hoodie with front pocket.</p>
+                <span>$42.99</span>
+            </div>
+            <div class="product-item" onmouseover="highlightItem(this)" onmouseout="removeHighlight(this)">
+                <img src="https://m.media-amazon.com/images/I/41+1Csr1pSL._AC_SY300_SX300_.jpg" alt="Earbuds">
+                <h3>Wireless Earbuds</h3>
+                <p>Bluetooth earbuds with noise cancellation feature.</p>
+                <span>$89.99</span>
+            </div>
+            <div class="product-item" onmouseover="highlightItem(this)" onmouseout="removeHighlight(this)">
+                <img src="https://img.drz.lazcdn.com/static/np/p/f2eacc29f0c34be709f926bd6be856d7.jpg_720x720q80.jpg_.webp" alt="Wallet">
+                <h3>Leather Wallet</h3>
+                <p>Genuine leather wallet with RFID blocking technology.</p>
+                <span>$29.49</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 Snap Quaks. All Rights Reserved.</p>
+        <p>Owner: Rabindra Basnet | Contact: 980000000 | Location: Kathmandu, Nepal</p>
+    </footer>
+
+</body>
+
+</html>

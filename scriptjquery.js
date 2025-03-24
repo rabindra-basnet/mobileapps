@@ -1,3 +1,4 @@
+
 function toggleMenu() {
     $(".nav-links").slideToggle(300);
 }
@@ -30,7 +31,8 @@ $(document).ready(function() {
             $('.nav-links').slideUp(300);
         }
     });
-    
+
+ 
     // Animated entrance for hero section
     $(".hero-content").hide().fadeIn(1200);
     
@@ -51,7 +53,7 @@ $(document).ready(function() {
     const totalSlides = $(".product-item").length;
     const visibleSlides = Math.min(4, totalSlides);
     
-    // Set up auto-scroll for product slider
+    // // Set up auto-scroll for product slider
     function nextSlide() {
         currentSlide = (currentSlide + 1) % (totalSlides - visibleSlides + 1);
         updateSlider();
@@ -73,8 +75,8 @@ $(document).ready(function() {
         function() { productInterval = setInterval(nextSlide, 5000); }
     );
     
-    // Add navigation arrows for product slider
-    $(".featured-products").append('<div class="slider-nav"><button class="prev-btn">❮</button><button class="next-btn">❯</button></div>');
+    // // Add navigation arrows for product slider
+    // $(".featured-products").append('<div class="slider-nav"><button class="prev-btn">❮</button><button class="next-btn">❯</button></div>');
     
     $(".prev-btn").click(function() {
         currentSlide = Math.max(0, currentSlide - 1);
@@ -132,6 +134,8 @@ $(document).ready(function() {
         const productName = $(this).parent().find("h3").text();
         showNotification(productName + " added to cart!");
     });
+
+    
     
     // Notification system
     function showNotification(message) {

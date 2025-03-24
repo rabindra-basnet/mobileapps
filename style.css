@@ -843,3 +843,144 @@ body.dark-theme .nav-links li a.active {
     transform: translateY(-3px);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
+
+/* Base styles for slider navigation */
+.slider-nav {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    transform: translateY(-50%);
+    z-index: 5;
+    pointer-events: none;
+    padding: 0 5px;
+}
+
+.prev-btn, .next-btn {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    pointer-events: auto;
+    margin: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+}
+
+.prev-btn:hover, .next-btn:hover {
+    background-color: #ff6b6b;
+    color: white;
+    transform: scale(1.1);
+}
+
+/* Mobile-specific enhancements */
+@media screen and (max-width: 768px) {
+    .prev-btn, .next-btn {
+        /* Increase size for easier tapping on mobile */
+        width: 48px;
+        height: 48px;
+        font-size: 22px;
+        
+        /* Improve visibility */
+        background-color: rgba(255, 255, 255, 0.95);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        
+        /* Position closer to edge for more room */
+        margin: 0 5px;
+    }
+    
+    /* Add a subtle glow effect to draw attention */
+    .prev-btn:after, .next-btn:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 50%;
+        box-shadow: 0 0 15px rgba(255, 107, 107, 0.5);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    .prev-btn:hover:after, .next-btn:hover:after {
+        opacity: 1;
+    }
+    
+    /* Make buttons stick to sides for easier reaching with thumbs */
+    .slider-nav {
+        padding: 0;
+    }
+    
+    .prev-btn {
+        margin-left: 10px;
+    }
+    
+    .next-btn {
+        margin-right: 10px;
+    }
+    
+    /* Add a subtle pulse animation to draw attention to buttons */
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+    
+    /* Apply animation only when product slider is hovered */
+    .product-slider:hover ~ .slider-nav .prev-btn,
+    .product-slider:hover ~ .slider-nav .next-btn {
+        animation: pulse 1.5s infinite;
+    }
+    
+    /* Active state when pressed */
+    .prev-btn:active, .next-btn:active {
+        transform: scale(0.95);
+        background-color: #ff6b6b;
+        color: white;
+    }
+}
+
+/* Smaller mobile screens (under 480px) */
+@media screen and (max-width: 480px) {
+    /* Semi-transparent until needed */
+    .prev-btn, .next-btn {
+        opacity: 0.7;
+        transition: opacity 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+    }
+    
+    .product-slider:hover ~ .slider-nav .prev-btn,
+    .product-slider:hover ~ .slider-nav .next-btn,
+    .prev-btn:hover, .next-btn:hover {
+        opacity: 1;
+    }
+    
+    /* Position adjustments for very small screens */
+    .slider-nav {
+        top: 45%; /* Move slightly higher to ensure visibility */
+    }
+    
+    .prev-btn {
+        transform: translateX(5px);
+    }
+    
+    .next-btn {
+        transform: translateX(-5px);
+    }
+    
+    .prev-btn:hover {
+        transform: translateX(5px) scale(1.1);
+    }
+    
+    .next-btn:hover {
+        transform: translateX(-5px) scale(1.1);
+    }
+}

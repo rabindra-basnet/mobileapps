@@ -1,3 +1,6 @@
+function toggleMenu() {
+    $(".nav-links").slideToggle(300);
+}
 
 $(document).ready(function() {
     // Smooth scrolling for navigation links

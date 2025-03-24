@@ -3,7 +3,37 @@ function toggleMenu() {
     const navLinks = document.querySelector('.nav-links');
     navLinks.classList.toggle('active');
 }
-
+ // Animated counter for sales (for promo banner)
+$(".promo-content").append('<div class="countdown">Sale ends in: <span id="days">00</span>:<span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span></div>');
+    
+    // Set the countdown date (7 days from now)
+    const countdownDate = new Date();
+    countdownDate.setDate(countdownDate.getDate() + 7);
+    
+    // Update the countdown every second
+    const countdownTimer = setInterval(function() {
+        const now = new Date().getTime();
+        const distance = countdownDate - now;
+        
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+        $("#days").text(String(days).padStart(2, '0'));
+        $("#hours").text(String(hours).padStart(2, '0'));
+        $("#minutes").text(String(minutes).padStart(2, '0'));
+        $("#seconds").text(String(seconds).padStart(2, '0'));
+        
+        if (distance < 0) {
+            clearInterval(countdownTimer);
+            $(".countdown").html("Sale has ended!");
+        }
+    }, 1000);
+    
+    // Back to top button
+    $("body").append('<button id="back-to-top" title="Back to top">↑</button>');
+    
 // Change theme functionality
 function changeTheme() {
     const theme = document.getElementById('theme').value;

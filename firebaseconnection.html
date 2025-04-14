@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Data Collection</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            font-weight: 600;
+            margin-bottom: 5px;
+            display: block;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .user-list {
+            margin-top: 40px;
+        }
+        .user-card {
+            background-color: #f9f9f9;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+        .user-card h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        .loading {
+            text-align: center;
+            margin: 20px 0;
+            color: #7f8c8d;
+        }
+        .error {
+            color: #e74c3c;
+            background-color: #fadbd8;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            display: none;
+        }
+        .success {
+            color: #27ae60;
+            background-color: #d4f6e2;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            display: none;
+        }
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        .tab {
+            padding: 10px 20px;
+            background-color: #eee;
+            cursor: pointer;
+            border-radius: 4px 4px 0 0;
+            margin-right: 5px;
+        }
+        .tab.active {
+            background-color: #3498db;
+            color: white;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>User Data Collection App</h1>
+        
+        <div class="tabs">
+            <div class="tab active" data-tab="submit">Submit Data</div>
+            <div class="tab" data-tab="view">View Data</div>
+        </div>
+        
+        <div class="error" id="error-message"></div>
+        <div class="success" id="success-message"></div>
+        
+        <div class="tab-content active" id="submit-tab">
+            <form id="user-form">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <input type="number" id="age" name="age" min="18" max="120" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="occupation">Occupation</label>
+                    <input type="text" id="occupation" name="occupation" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="interests">Interests</label>
+                    <textarea id="interests" name="interests" rows="3" required></textarea>
+                </div>
+                
+                <button type="submit">Submit Data</button>
+            </form>
+        </div>
+        
+        <div class="tab-content" id="view-tab">
+            <h2>User Records</h2>
+            <button id="refresh-data">Refresh Data</button>
+            <div id="loading" class="loading">Loading data...</div>
+            <div id="user-list" class="user-list"></div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.22.2/firebase-app-compat.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.22.2/firebase-firestore-compat.min.js"></script>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        
+        const firebaseConfig = {
+          apiKey: "AIzaSyD5-KmGftjYtOLgM2-bf4WLOF0mI3FwkmI",
+          authDomain: "collectdata-5c706.firebaseapp.com",
+          projectId: "collectdata-5c706",
+          storageBucket: "collectdata-5c706.firebasestorage.app",
+          messagingSenderId: "147248144585",
+          appId: "1:147248144585:web:e8db160de0b530feb0ad18",
+          measurementId: "G-CQ50TDKWMC"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        const usersCollection = db.collection('users');
+        
+        // DOM Elements
+        const userForm = document.getElementById('user-form');
+        const userList = document.getElementById('user-list');
+        const loadingElement = document.getElementById('loading');
+        const errorMessage = document.getElementById('error-message');
+        const successMessage = document.getElementById('success-message');
+        const refreshButton = document.getElementById('refresh-data');
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        // Tab functionality
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabId = tab.getAttribute('data-tab');
+                
+                // Update active tab
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Show corresponding content
+                tabContents.forEach(content => content.classList.remove('active'));
+                document.getElementById(`${tabId}-tab`).classList.add('active');
+                
+                // Load user data when switching to view tab
+                if (tabId === 'view') {
+                    fetchUserData();
+                }
+            });
+        });
+        
+        // Form submission
+        userForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const age = parseInt(document.getElementById('age').value);
+            const occupation = document.getElementById('occupation').value;
+            const interests = document.getElementById('interests').value;
+            
+            try {
+                // Add document to Firestore
+                await usersCollection.add({
+                    name,
+                    email,
+                    age,
+                    occupation,
+                    interests,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                
+                // Show success message
+                showMessage('success', 'User data submitted successfully!');
+                
+                // Reset form
+                userForm.reset();
+                
+            } catch (error) {
+                // Show error message
+                showMessage('error', `Error: ${error.message}`);
+                console.error('Error adding document: ', error);
+            }
+        });
+        
+        // Show message function (error or success)
+        function showMessage(type, message) {
+            const element = document.getElementById(`${type}-message`);
+            element.textContent = message;
+            element.style.display = 'block';
+            
+            // Hide message after 5 seconds
+            setTimeout(() => {
+                element.style.display = 'none';
+            }, 5000);
+        }
+        
+        // Fetch user data from Firestore
+        async function fetchUserData() {
+            loadingElement.style.display = 'block';
+            userList.innerHTML = '';
+            
+            try {
+                const snapshot = await usersCollection.orderBy('timestamp', 'desc').get();
+                
+                if (snapshot.empty) {
+                    userList.innerHTML = '<p>No user records found.</p>';
+                } else {
+                    snapshot.forEach(doc => {
+                        const userData = doc.data();
+                        const userCard = createUserCard(userData, doc.id);
+                        userList.appendChild(userCard);
+                    });
+                }
+                
+            } catch (error) {
+                showMessage('error', `Error fetching data: ${error.message}`);
+                console.error('Error getting documents: ', error);
+            } finally {
+                loadingElement.style.display = 'none';
+            }
+        }
+        
+        // Create user card element
+        function createUserCard(user, id) {
+            const card = document.createElement('div');
+            card.className = 'user-card';
+            card.id = `user-${id}`;
+            
+            // Format timestamp if available
+            let timestampText = 'No timestamp';
+            if (user.timestamp) {
+                const date = user.timestamp.toDate();
+                timestampText = date.toLocaleString();
+            }
+            
+            card.innerHTML = `
+                <h3>${user.name}</h3>
+                <p><strong>Email:</strong> ${user.email}</p>
+                <p><strong>Age:</strong> ${user.age}</p>
+                <p><strong>Occupation:</strong> ${user.occupation}</p>
+                <p><strong>Interests:</strong> ${user.interests}</p>
+                <p><small>Submitted: ${timestampText}</small></p>
+                <button class="delete-btn" data-id="${id}">Delete</button>
+            `;
+            
+            // Add delete functionality
+            const deleteBtn = card.querySelector('.delete-btn');
+            deleteBtn.addEventListener('click', async () => {
+                try {
+                    await usersCollection.doc(id).delete();
+                    card.remove();
+                    showMessage('success', 'Record deleted successfully');
+                } catch (error) {
+                    showMessage('error', `Error deleting record: ${error.message}`);
+                    console.error('Error deleting document: ', error);
+                }
+            });
+            
+            return card;
+        }
+        
+        // Refresh button functionality
+        refreshButton.addEventListener('click', fetchUserData);
+        
+        // Load data on initial view tab click
+        document.querySelector('.tab[data-tab="view"]').addEventListener('click', fetchUserData);
+    </script>
+</body>
+</html>

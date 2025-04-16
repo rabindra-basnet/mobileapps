@@ -562,7 +562,7 @@
                         
                         // Redirect to home page after 2 seconds
                         setTimeout(() => {
-                            // window.location.href = '/home'; // Uncomment when ready to redirect to home page
+                            window.location.href = '/home'; // Uncomment when ready to redirect to home page
                             console.log('Signed up as:', user.email);
                         }, 2000);
                     });
@@ -607,90 +607,7 @@
                     showError(errorMsg);
                 });
         });
-        
-        // Social Logins - Google
-        googleLoginBtn.addEventListener('click', () => {
-            const provider = new firebase.auth.GoogleAuthProvider();
-            handleSocialLogin(provider);
-        });
-        
-        googleSignupBtn.addEventListener('click', () => {
-            const provider = new firebase.auth.GoogleAuthProvider();
-            handleSocialLogin(provider);
-        });
-        
-        // Social Logins - Facebook
-        facebookLoginBtn.addEventListener('click', () => {
-            const provider = new firebase.auth.FacebookAuthProvider();
-            handleSocialLogin(provider);
-        });
-        
-        facebookSignupBtn.addEventListener('click', () => {
-            const provider = new firebase.auth.FacebookAuthProvider();
-            handleSocialLogin(provider);
-        });
-        
-        // Social Logins - Apple
-        appleLoginBtn.addEventListener('click', () => {
-            const provider = new firebase.auth.OAuthProvider('apple.com');
-            handleSocialLogin(provider);
-        });
-        
-        appleSignupBtn.addEventListener('click', () => {
-            const provider = new firebase.auth.OAuthProvider('apple.com');
-            handleSocialLogin(provider);
-        });
-        
-        // Generic Social Login Handler
-        function handleSocialLogin(provider) {
-            showLoading();
-            
-            auth.signInWithPopup(provider)
-                .then((result) => {
-                    const user = result.user;
-                    const isNewUser = result.additionalUserInfo.isNewUser;
-                    
-                    if (isNewUser) {
-                        // Add user to Firestore
-                        return db.collection('users').doc(user.uid).set({
-                            name: user.displayName || '',
-                            email: user.email || '',
-                            createdAt: firebase.firestore.FieldValue.serverTimestamp()
-                        })
-                        .then(() => {
-                            showSuccess('Account created successfully! Redirecting...');
-                            
-                            // Redirect to home page after 2 seconds
-                            setTimeout(() => {
-                                // window.location.href = '/home'; // Uncomment when ready to redirect to home page
-                                console.log('Signed up as:', user.email);
-                            }, 2000);
-                        });
-                    } else {
-                        showSuccess('Login successful! Redirecting...');
-                        
-                        // Redirect to home page after 2 seconds
-                        setTimeout(() => {
-                            // window.location.href = '/home'; // Uncomment when ready to redirect to home page
-                            console.log('Logged in as:', user.email);
-                        }, 2000);
-                    }
-                })
-                .catch((error) => {
-                    console.error("Social login error:", error);
-                    showError('Authentication failed. Please try again or use another method.');
-                });
-        }
-        
-        // Check if user is already logged in
-        auth.onAuthStateChanged((user) => {
-            if (user) {
-                // User is signed in
-                console.log('User is already signed in:', user.email);
-                // Uncomment the line below to redirect logged-in users automatically
-                // window.location.href = '/home';
-            }
-        });
+
     </script>
 </body>
 </html>
